@@ -21,9 +21,12 @@ module.exports = function(app) {
 
       // Add it to the authenticated user channel
       app.channel('authenticated').join(connection);
-      // if(user.channels.indexOf('authenticated') === -1) {
 
-      // }
+      if(user.channels.indexOf('authenticated') === -1) {
+        app.service('users').patch(user._id, {
+          channels: [...user.channels, 'authenticated']
+        });
+      }
 
       // Channels can be named anything and joined on any condition
 

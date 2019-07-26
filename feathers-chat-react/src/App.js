@@ -248,7 +248,11 @@ class App extends Component {
                 </form>
 
                 <ul className="channels">
-                  <li>#General</li>
+                  {this.state.currentUser.channels.map((channel, index) => (
+                    <li onClick={() => console.log("have to update channel handler")} key={index}>
+                      #{channel}
+                    </li>
+                  ))}
                 </ul>
 
                 <ul className="users">
