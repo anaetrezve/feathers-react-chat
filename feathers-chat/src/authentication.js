@@ -22,6 +22,14 @@ module.exports = function (app) {
       remove: [
         authentication.hooks.authenticate('jwt')
       ]
+    },
+    after: {
+      create: [(context) => {
+        context.result.user = context.params.user;
+        delete context.result.user.password;
+        delete context.result.user.__v;
+        return context;
+      }]
     }
   });
 };

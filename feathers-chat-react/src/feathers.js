@@ -1,23 +1,14 @@
-const feathers = require('@feathersjs/feathers');
-const socketio = require('@feathersjs/socketio-client');
-const io = require('socket.io-client');
-const auth = require('@feathersjs/authentication-client');
+import io from 'socket.io-client';
+import feathers from '@feathersjs/client';
 
-const socket = io('http://api.feathersjs.com');
+// Socket.io is exposed as the `io` global.
+const socket = io('http://localhost:3030');
+// @feathersjs/client is exposed as the `feathers` global.
 const app = feathers();
 
-app.configure(socketio(socket));
-
-app.configure(auth({
-  header: 'Authorization',
-  prefix: '',
-  path: '/authentication',
-  jwtStrategy: 'jwt',
-  entity: 'user',
-  service: 'users',
-  cookie: 'feathers-jwt',
-  storageKey: 'feathers-jwt',
-  storage: window.localStorage
-}))
+app.configure(feathers.socketio(socket));
+app.configure(feathers.authentication({
+  storage: localStorage
+}));
 
 export default app;

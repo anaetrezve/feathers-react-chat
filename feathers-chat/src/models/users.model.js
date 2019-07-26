@@ -7,7 +7,7 @@ module.exports = function (app) {
   const users = new mongooseClient.Schema({
     email: {type: String, unique: true, lowercase: true},
     password: { type: String },
-    channels: []
+    channels: [{type: mongooseClient.Schema.Types.ObjectId, ref: 'channels'}]
   }, {
     timestamps: true
   });

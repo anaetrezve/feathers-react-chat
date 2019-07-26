@@ -7,7 +7,7 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
   const channels = new Schema({
     messages: [{
-      type: mongooseClient.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'messages'
     }],
     name: { type: String, required: true }
